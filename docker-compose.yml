@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  bitrix-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - BITRIX_URL=${BITRIX_URL}
+      - DEBUG=${DEBUG:-False}
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./app:/app/app:ro  # монтируем код для разработки
+
+volumes:
+  app-data:
