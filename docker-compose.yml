@@ -12,7 +12,7 @@ services:
       - .env
     restart: unless-stopped
     volumes:
-      - ./app:/app/app:ro  # монтируем код для разработки
+      - ./app:/app/app:ro
 
 volumes:
   app-data:

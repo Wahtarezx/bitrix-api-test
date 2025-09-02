@@ -2,7 +2,7 @@ import aiohttp
 from typing import Dict, Any
 
 
-class BitrixController:
+class BitrixService:
     def __init__(self, base_url: str):
         self.base_url = base_url
         self.session = aiohttp.ClientSession()
@@ -42,14 +42,12 @@ class BitrixController:
         async with self.session.get(url, params=params) as response:
             if response.status == 200:
                 data = await response.json()
-                print(data)
                 leads = data.get('result', [])
 
                 if not leads:
                     raise Exception("Лид не найден")
 
                 for lead in leads:
-                    print(lead)
                     phone_entries = lead.get('PHONE')
                     if isinstance(phone_entries, list):
                         for phone_entry in phone_entries:
